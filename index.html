@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calm - A Mesmerizing Experience</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0a0a1f;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(
+                125deg,
+                #FF0080,
+                #7928CA,
+                #0070F3,
+                #00DFD8,
+                #7000FF,
+                #FF0080
+            );
+            background-size: 400% 400%;
+            animation: gradientShift 30s ease infinite;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at center,
+                transparent,
+                rgba(10, 10, 31, 0.3)
+            );
+            mix-blend-mode: overlay;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            width: 150vmax;
+            height: 150vmax;
+            border-radius: 50%;
+            filter: blur(80px);
+            mix-blend-mode: soft-light;
+            opacity: 0.6;
+            animation: float 25s infinite;
+        }
+
+        .orb1 {
+            background: radial-gradient(circle at center, #ff6b6b, #4ecdc4);
+            animation: float 25s infinite, colorShift1 15s infinite;
+        }
+
+        .orb2 {
+            background: radial-gradient(circle at center, #a8e6cf, #3498db);
+            animation: float 25s infinite -8s, colorShift2 15s infinite;
+        }
+
+        .orb3 {
+            background: radial-gradient(circle at center, #ffd93d, #ff6b6b);
+            animation: float 25s infinite -16s, colorShift3 15s infinite;
+        }
+
+        .shimmer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.03) 0%,
+                rgba(255, 255, 255, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            animation: shimmer 15s linear infinite;
+        }
+
+        .text-container {
+            position: relative;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .animated-text {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.8rem;
+            color: rgba(255, 255, 255, 0.95);
+            text-align: center;
+            letter-spacing: 0.25em;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.4),
+                         0 0 40px rgba(255, 255, 255, 0.2);
+            white-space: nowrap;
+            opacity: 0;
+            font-weight: 300;
+        }
+
+        .text1 { animation: textCycle 15s infinite; }
+        .text2 { animation: textCycle 15s infinite 5s; }
+        .text3 { animation: textCycle 15s infinite 10s; }
+
+        .attribution {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            letter-spacing: 0.15em;
+            z-index: 2;
+            animation: fadeIn 2s ease-in;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes colorShift1 {
+            0%, 100% { background: radial-gradient(circle at center, #ff6b6b, #4ecdc4); }
+            50% { background: radial-gradient(circle at center, #4ecdc4, #ff6b6b); }
+        }
+
+        @keyframes colorShift2 {
+            0%, 100% { background: radial-gradient(circle at center, #a8e6cf, #3498db); }
+            50% { background: radial-gradient(circle at center, #3498db, #a8e6cf); }
+        }
+
+        @keyframes colorShift3 {
+            0%, 100% { background: radial-gradient(circle at center, #ffd93d, #ff6b6b); }
+            50% { background: radial-gradient(circle at center, #ff6b6b, #ffd93d); }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(-25%, -25%) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translate(25%, -25%) rotate(90deg) scale(1.1);
+            }
+            50% {
+                transform: translate(25%, 25%) rotate(180deg) scale(1);
+            }
+            75% {
+                transform: translate(-25%, 25%) rotate(270deg) scale(1.1);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        @keyframes textCycle {
+            0%, 25% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
+                filter: blur(5px);
+            }
+            33%, 58% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+                filter: blur(0);
+            }
+            66%, 100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.1);
+                filter: blur(5px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 0.7;
+                transform: translateY(0);
+            }
+        }
+
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at center,
+                transparent 0%,
+                rgba(10, 10, 31, 0.4) 100%
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .gradient-orb {
+                width: 200vmax;
+                height: 200vmax;
+                filter: blur(60px);
+            }
+            .animated-text {
+                font-size: 1.6rem;
+                letter-spacing: 0.2em;
+            }
+            .attribution {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="gradient-overlay"></div>
+        <div class="gradient-orb orb1"></div>
+        <div class="gradient-orb orb2"></div>
+        <div class="gradient-orb orb3"></div>
+        <div class="shimmer"></div>
+        <div class="vignette"></div>
+        <div class="text-container">
+            <div class="animated-text text1">BREATHE</div>
+            <div class="animated-text text2">SLOW DOWN YOUR HEART</div>
+            <div class="animated-text text3">CALM YOUR MIND</div>
+        </div>
+    </div>
+    <div class="attribution">Calm by Stephen Eneji</div>
+</body>
+</html>
